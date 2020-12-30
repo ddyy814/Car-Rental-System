@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<title>Welcome to Car Rental</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    .myLink {display: none}
+</style>
+<body class="w3-light-grey">
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+    <a href="welcome" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b><i class="fa fa-car w3-margin-right"></i>Car Rental.com</b></a>
+    <div href="#" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><i class="fa fa-search"></i></div>
+    <div th:switch="${isLogged}">
+    <a th:case="true" href="logout" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><b><i class="fa fa-lock w3-margin-right"></i>logout</b></a>
+    <a th:case="*" href="login" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><b><i class="fa fa-lock w3-margin-right"></i>Sign In</b></a>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width: 100%">
+    <img src="https://www.getpalmd.com/wp-content/uploads/2016/08/Greatest-driving-roads-Stelvio-Pass.jpg"
+         alt="Title">
+
+    <div class="w3-display-middle" style="width:65%">
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Car Rental</button>
+        </div>
+
+        <!-- Tabs -->
+        <div id="Car" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Best car rental in the world!</h3>
+            <p><span class="w3-tag w3-orange">DISCOUNT!</span> Special offer if you book today: 25% off anywhere in the world with <span class=" w3-blue">Car Rental.com</span></p>
+            <form action="#" th:action="@{/tempForm}" th:object="${tempRent}" method="post">
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-half">
+                    <label for="city"><i class="fa fa-map-marker"></i> Pick Up Location</label>
+                    <input class="w3-input w3-border" type="text" th:field="*{pickUp}" id="city" name="city" placeholder="San Jose, CA" required>
+                </div>
+                <div class="w3-half">
+                    <label for="city"><i class="fa fa-map-marker"></i> Drop Off Location</label>
+                    <input class="w3-input w3-border" type="text" th:field="*{dropOff}" id="city" name="city" placeholder="Los Angeles, CA" required>
+                </div>
+                <div class="w3-half">
+                    <label class="pickup">Pick-Up Date</label><br>
+                    <input type="date" th:field="*{startDate}" class="form-control" name="start_date" placeholder="Pick-up date" required>
+                </div>
+                <div class="w3-half">
+                    <label class="dropoff">Drop-Off Date</label><br>
+                    <input type="date" th:field="*{endDate}" class="form-control" name="end_date" placeholder="Drop-off date" required>
+                </div>
+            </div>
+            <p><button class="w3-button w3-dark-grey" type="submit">Search</button></p>
+            </form>
+        </div>
+    </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px;">
+
+    <!-- Newsletter -->
+    <div class="w3-container">
+        <div class="w3-panel w3-padding-16 w3-black w3-card w3-hover-opacity-off">
+            <h2>Get the best offers first!</h2>
+            <p>Join our newsletter.</p>
+            <label>E-mail</label>
+            <input class="w3-input w3-border" type="text" placeholder="Your Email address">
+            <button type="button" class="w3-button w3-blue w3-margin-top">Subscribe</button>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="w3-container">
+        <h2>Contact</h2>
+        <p>Let us book your next car!</p>
+        <i class="fa fa-map-marker" style="width:30px"></i> California, US<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+        <form action="/action_page.php" target="_blank">
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="Email"></p>
+            <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message" required name="Message"></p>
+            <p><button class="w3-button w3-black w3-padding-large" type="submit">SEND MESSAGE</button></p>
+        </form>
+    </div>
+
+    <!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+    <h5>Find Us On</h5>
+    <div class="w3-xlarge w3-padding-16">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+</footer>
+
+<script>
+    // Tabs
+    function openLink(evt, linkName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("myLink");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+        }
+        document.getElementById(linkName).style.display = "block";
+        evt.currentTarget.className += " w3-blue";
+    }
+
+    // Click on the first tablink on load
+    document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>

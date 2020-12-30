@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Car Rental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arapey&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 90%;
+            margin: 5px auto;
+            position: relative;
+            text-align:center;
+        }
+        .box {
+            display: inline-block;
+            width: 450px;
+            height: 550px;
+            margin: 10px 10px 10px 10px;
+            border: 1px solid rgba(117, 117, 117, 0.52);
+            border-collapse: collapse;
+        }
+        /* Title image */
+        .img-container {
+            display: block;
+            text-align: center;
+            margin-top: 1%;
+        }
+
+        /* welcome message */
+        .div_1{
+            color: #00355f;
+            margin-left: 12%;
+            font-weight: bold;
+        }
+
+        /* form for pick-up and drop-off*/
+        .form {
+            margin-left: 20%;
+        }
+
+        /* Search button style*/
+        .button_1 {
+            background-color: #0b4eaf;
+            border: none;
+            color: white;
+            padding: 19px 36px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /* Reserve button style*/
+        .button_2 {
+            background-color: #af150e;
+            border: none;
+            color: white;
+            padding: 11px 27px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /* pick up date */
+        .pickup, .dropoff {
+            background-color: #ffffff;
+            border: 1px solid rgba(117, 117, 117, 0.52);
+            color: rgba(5, 5, 5, 0.98);
+            padding: 18px 35px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /* form control */
+        .form-control {
+            background-color: #ffffff;
+            border: 1px solid rgba(117, 117, 117, 0.52);
+            color: rgba(5, 5, 5, 0.98);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /* table style */
+        table, th, td {
+            border: 1px solid rgba(117, 117, 117, 0.52);
+            border-collapse: collapse;
+            margin-top: 1%;
+            width: 1250px;
+            text-align: center;
+            color: rgba(5, 5, 5, 0.98);
+        }
+        /* price style */
+        h1{
+            font-size: 20px;
+            color: #00aa02;
+            font-weight: bold;
+        }
+        h2{
+            font-size: 20px;
+            color: #00aa02;
+            font-weight: bold;
+        }
+        h3{
+            font-size: 20px;
+            color: #00aa02;
+            font-weight: bold;
+        }
+
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body  class="w3-light-grey">
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+    <a href="welcome" class="w3-bar-item w3-button w3-text-blue w3-hover-blue"><b><i class="fa fa-car w3-margin-right"></i>Car Rental.com</b></a>
+    <div href="#" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><i class="fa fa-search"></i></div>
+    <div th:switch="${isLogged}">
+    <a th:case="true" href="logout" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><b><i class="fa fa-lock w3-margin-right"></i>logout</b></a>
+    <a th:case="*" href="login" class="w3-bar-item w3-button w3-right w3-hover-blue w3-text-grey"><b><i class="fa fa-lock w3-margin-right"></i>Sign In</b></a>
+    </div>
+</div>
+<div class="img-container">
+<img src="https://www.lufthansa.com/content/dam/lh/images/local_images/ancillary/lh_anc_car_pano_XL_en.jpg.transform/lh-dcep-transform-width-1440/img.jpg"
+     alt="Title">
+</div>
+<div class="div_1">
+    <p th:text="'Hello, ' + ${name} + '!'"/>
+</div>
+
+    <div class="container">
+        <div th:each="car: ${cars}" class="box">
+            <th:block>
+                <img th:src="${car.url}"
+                    alt="eco_Versa" width="90%"><br>
+                <p th:text="${car.name}">name</p>
+                <p th:text="${car.price}">price</p>
+            </th:block>
+            <img src="https://i.ibb.co/y8X60RW/eco-p.png" alt="Eco_p" width="70%">
+            <img src="https://i.ibb.co/VjYx7dR/eco-b.png" alt="Eco_b" width="70%">
+            <a th:href="@{/booking(id=${car.id})}"><button class="button_2">Reserve Now</button></a>
+        </div>
+    </div>
+
+</body>
+</html>
